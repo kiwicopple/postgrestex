@@ -22,6 +22,13 @@ be found at [https://hexdocs.pm/postgrestex](https://hexdocs.pm/postgrestex).
 
 ## Getting Started
 
+
+## Initialize and read from a table
+
+```
+ Client.init("api") |> Client.from("todos") |> Client.call()
+ ```
+
 ### Create
 
 ### Read
