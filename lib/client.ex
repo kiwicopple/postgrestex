@@ -66,6 +66,7 @@ defmodule Client do
     :rpc
   end
 
+  @spec call(map()) :: :ok | :error
   def call(req) do
     url = req.path
     headers = req.headers
@@ -76,5 +77,7 @@ defmodule Client do
       "PUT" -> IO.puts("TODO")
       _ -> IO.puts("Some other stuff")
     end
+
+    :ok
   end
 end
