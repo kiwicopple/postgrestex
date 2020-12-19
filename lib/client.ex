@@ -12,9 +12,19 @@ defmodule Client do
       :world
 
   """
+  def init(schema, path \\ "https://localhost:3000") do
+    %{
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Accept-Profile": schema,
+      "Content-Profile": schema,
+      path: path
+    }
+  end
+
   @spec auth(String.t(), String.t(), String.t()) :: String.t()
   def auth(token, username \\ "", password \\ "") do
-    "samples"
+    ""
   end
 
   @doc """
@@ -25,9 +35,9 @@ defmodule Client do
       iex> Client.schema()
       :schema
   """
-  @spec schema(String.t()) :: String.t()
-  def schema(schema) do
-    "asldkjf"
+  @spec schema(map(), String.t()) :: map()
+  def schema(req, schema) do
+    Map.merge(req, %{schema: schema})
   end
 
   @doc """
@@ -39,12 +49,18 @@ defmodule Client do
       :from
 
   """
-  @spec from(String.t()) :: String.t()
-  def from(table) do
-    "laksjdf"
+  @spec from(map(), String.t()) :: map()
+  def from(req, table) do
+    req.merge(%{path: "#{Map.fetch(req, :path)}/#{table}"})
   end
 
   def rpc(func, params) do
     :rpc
+  end
+
+  def rpc_path(req, func, params) do
+  end
+
+  def call do
   end
 end
