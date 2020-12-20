@@ -1,6 +1,6 @@
 defmodule FilterRequestBuilder do
   def filter(req, column, value) do
-    :todo
+    # Either filter in or filter out based on Self.negate_next.
   end
 
   def eq(req, column, value) do

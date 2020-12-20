@@ -7,12 +7,12 @@ defmodule SelectRequestBuilder do
 
   def limit(req, size, start) do
     headers =
-      Map.merge(req.headers, %{Range: "{#start}-#{start + size - 1}", "Range-Unit": "items"})
+      Map.merge(req.headers, %{Range: "#{start}-#{start + size - 1}", "Range-Unit": "items"})
   end
 
   def range(req, start, _end) do
     updated_headers =
-      Map.merge(req.headers, %{Range: "{#start}-#{_end - 1}", "Range-Unit": "items"})
+      Map.merge(req.headers, %{Range: "#{start}-#{_end - 1}", "Range-Unit": "items"})
 
     updated_headers |> Map.merge(req)
   end
