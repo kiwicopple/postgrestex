@@ -1,6 +1,6 @@
 # Postgrestex
 
-Elixir Client library for Postgrest.
+Elixir Client library for Postgrest. The design mirrors that of [postgrest-py](https://github.com/supabase/postgrest-py)
 
 ## Installation
 
@@ -24,21 +24,20 @@ be found at [https://hexdocs.pm/postgrestex](https://hexdocs.pm/postgrestex).
 
 
 TODOS:
-- [ ] Support Filter Requess
+- [ ] Support Filter Request
 - [ ] Support Select Requests
 - [ ] Write Tests
 - [ ] Support Auth
 - [ ] Document all functions
 
 ## Initialize and read from a table
-
 ```
  Client.init("api") |> Client.from("todos") |> Client.call()
- ```
+```
 
 ### Create
 ```
-Client.init("api") |> Client.from("todos") |> RequestBuilder.insert(%{"name": "Việt Nam", "capital": "Hà Nội" }, False) |> Client.call()
+Client.init("api") |> Client.from("todos") |> RequestBuilder.insert(%{"name": "Singapore", "capital": "Singapore" }, False) |> Client.call()
 ```
 
 ### Read
@@ -47,7 +46,13 @@ Client.init("api") |> Client.from("todos") |> RequestBuilder.select(["id", "name
 ```
 
 ### Update
-
+```
+Client.init("api") |> Client.from("todos") |> FilterRequestBuilder.eq("name", "Singapore") |> RequestBuilder.update(%{"capital": "Sentosa"}) |> Client.call()
+```
 
 ### Delete
+```
+Client.init("api") |> Client.from("todos") |> FilterRequestBuilder.eq("name", "Singapore") |> Client.delete() |> Client.call()
+```
+
 
