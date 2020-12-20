@@ -25,10 +25,11 @@ be found at [https://hexdocs.pm/postgrestex](https://hexdocs.pm/postgrestex).
 
 TODOS:
 - [ ] Support Filter Request
-- [ ] Support Select Requests
+- [x] Support Select Requests
 - [ ] Write Tests
 - [ ] Support Auth
 - [ ] Document all functions
+- [ ] Convert to use async library
 
 ## Initialize and read from a table
 ```

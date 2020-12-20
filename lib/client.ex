@@ -23,7 +23,8 @@ defmodule Client do
       },
       path: path,
       schema: schema,
-      method: "GET"
+      method: "GET",
+      negate_next: False,
     }
   end
 
