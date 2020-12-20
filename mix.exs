@@ -22,6 +22,8 @@ defmodule Postgrestex.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.7"},
+      {:poison, "~> 3.1"},
+
       # Dev dependencies
       {:ex_doc, "~> 0.13", only: :dev, runtime: false},
       {:dialyxir, "~> 0.5", only: :dev, runtime: false},

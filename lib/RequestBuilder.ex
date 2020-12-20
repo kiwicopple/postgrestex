@@ -1,21 +1,27 @@
 defmodule RequestBuilder do
   def select(req, columns) do
-    merge(req.headers, %{select: Enum.join(columns, ",", method: "GET")})
+    Map.put(
+      req,
+      :headers,
+      Map.merge(req.headers, %{select: Enum.join(columns, ","), method: "GET"})
+    )
   end
 
-  def insert(req, json, upsert) do
+  def insert(req, json, upsert \\ False) do
     prefer_option = if upsert, do: ",resolution=merge-duplicates", else: ""
-    headers = merge(req.headers, %{Prefer: prefer_option})
-    headers
+    headers = Map.merge(req.headers, %{Prefer: prefer_option, method: "POST"})
+    req |> Map.merge(headers) |> Map.merge(%{body: json})
   end
 
   def update(req, json) do
-    updated_headers = merge(req.headers, %{Prefer: "return=representation"})
-    updated_headers |> merge(%{method: "PATCH", body: json})
+    updated_headers = Map.merge(req.headers, %{Prefer: "return=representation"})
+
     updated_headers
+    |> Map.merge(%{method: "PATCH", body: json})
+    |> Map.merge(req)
   end
 
   def delete(req, json) do
-    req |> merge(%{method: "DELETE", body: json})
+    req |> Map.merge(%{method: "DELETE", body: json})
   end
 end

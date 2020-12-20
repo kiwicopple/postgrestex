@@ -23,6 +23,13 @@ be found at [https://hexdocs.pm/postgrestex](https://hexdocs.pm/postgrestex).
 ## Getting Started
 
 
+TODOS:
+- [ ] Support Filter Requess
+- [ ] Support Select Requests
+- [ ] Write Tests
+- [ ] Support Auth
+- [ ] Document all functions
+
 ## Initialize and read from a table
 
 ```
@@ -30,10 +37,17 @@ be found at [https://hexdocs.pm/postgrestex](https://hexdocs.pm/postgrestex).
  ```
 
 ### Create
+```
+Client.init("api") |> Client.from("todos") |> RequestBuilder.insert(%{"name": "Việt Nam", "capital": "Hà Nội" }, False) |> Client.call()
+```
 
 ### Read
+```
+Client.init("api") |> Client.from("todos") |> RequestBuilder.select(["id", "name"]) |>Client.call()
+```
 
 ### Update
+
 
 ### Delete
 

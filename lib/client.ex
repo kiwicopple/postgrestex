@@ -12,6 +12,7 @@ defmodule Client do
       :world
 
   """
+  @spec init(map(), String.t()) :: map()
   def init(schema, path \\ "http://localhost:3000") do
     %{
       headers: %{
@@ -61,21 +62,24 @@ defmodule Client do
     Map.merge(req, %{path: "#{req.path}/#{table}"})
   end
 
+  @spec rpc(map(), String.t(), map()) :: map()
   def rpc(req, func, params) do
     # Append to path and set req type to post 
-    :rpc
+    Map.merge(req, %{path: "#{req.path}/#{func}", body: params, method: "POST"})
   end
 
   @spec call(map()) :: :ok | :error
   def call(req) do
     url = req.path
     headers = req.headers
+    body = Poison.encode!(Map.get(req, :body, %{}))
 
     case req.method do
+      "POST" -> HTTPoison.post!(url, body, headers)
       "GET" -> HTTPoison.get!(url, headers)
-      "POST" -> IO.puts("TODO")
-      "PUT" -> IO.puts("TODO")
-      _ -> IO.puts("Some other stuff")
+      "PATCH" -> HTTPoison.patch!(url, %{}, headers)
+      "DELETE" -> HTTPoison.delete!(url)
+      _ -> IO.puts("Method not found!")
     end
 
     :ok
