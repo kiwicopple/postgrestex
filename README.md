@@ -32,28 +32,49 @@ TODOS:
 - [ ] Convert to use async library
 
 ## Initialize and read from a table
-```
- Client.init("api") |> Client.from("todos") |> Client.call()
+```ex
+ Client.init("api") 
+ |> Client.from("todos") 
+ |> Client.call()
 ```
 
 ### Create
-```
-Client.init("api") |> Client.from("todos") |> RequestBuilder.insert(%{"name": "Singapore", "capital": "Singapore" }, False) |> Client.call()
+```ex
+Client.init("api") 
+|> Client.from("todos") 
+|> RequestBuilder.insert(%{
+    "name": "Singapore", 
+    "capital": "Singapore" 
+  }, False) 
+|> Client.call()
 ```
 
 ### Read
-```
-Client.init("api") |> Client.from("todos") |> RequestBuilder.select(["id", "name"]) |>Client.call()
+```ex
+Client.init("api") 
+|> Client.from("todos") 
+|> RequestBuilder.select(["id", "name"]) 
+|> Client.call()
 ```
 
 ### Update
-```
-Client.init("api") |> Client.from("todos") |> FilterRequestBuilder.eq("name", "Singapore") |> RequestBuilder.update(%{"capital": "Sentosa"}) |> Client.call()
+```ex
+Client.init("api") 
+|> Client.from("todos") 
+|> FilterRequestBuilder.eq("name", "Singapore") 
+|> RequestBuilder.update(%{ 
+    "capital": "Sentosa"
+  }) 
+|> Client.call()
 ```
 
 ### Delete
-```
-Client.init("api") |> Client.from("todos") |> FilterRequestBuilder.eq("name", "Singapore") |> Client.delete() |> Client.call()
+```ex
+Client.init("api") 
+|> Client.from("todos") 
+|> FilterRequestBuilder.eq("name", "Singapore") 
+|> Client.delete() 
+|> Client.call()
 ```
 
 
